@@ -1,0 +1,36 @@
+{
+    "name": "dhii/validation-base",
+    "description": "Base concrete functionality for validation.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dhii Team",
+            "email": "development@dhii.co"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^5.3 | ^7.0",
+        "dhii/validation-interface": "^0.1",
+        "dhii/validation-abstract": "dev-develop"
+    },
+    "require-dev": {
+        "dhii/php-cs-fixer-config": "dev-php-5.3",
+        "phpunit/phpunit": "^4.8",
+        "ptrofimov/xpmock": "^1.1",
+        "codeclimate/php-test-reporter": "<=0.3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dhii\\Validation\\": "src/"
+        }
+    },
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Dhii/validation-abstract"
+        }
+    ]
+}
