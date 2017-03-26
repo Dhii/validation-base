@@ -26,6 +26,10 @@
             "Dhii\\Validation\\": "src/"
         }
     },
+    "scripts": {
+        "test": "phpunit",
+        "csfix": "php-cs-fixer fix -vvv"
+    },
 
     "repositories": [
         {
