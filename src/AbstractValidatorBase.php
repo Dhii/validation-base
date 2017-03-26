@@ -10,14 +10,14 @@ use Dhii\Validation\Exception\ValidationFailedException;
  * 
  * Currently, allows creation of concrete exceptions.
  *
- * @since [*next-version*]
+ * @since 0.1
  */
 abstract class AbstractValidatorBase extends AbstractValidator implements ValidatorInterface
 {
     /**
      * {@inheritdoc}
      *
-     * @since [*next-version*]
+     * @since 0.1
      */
     protected function _createValidationException($message, $code = 0, \Exception $previous = null)
     {
@@ -27,7 +27,7 @@ abstract class AbstractValidatorBase extends AbstractValidator implements Valida
     /**
      * {@inheritdoc}
      *
-     * @since [*next-version*]
+     * @since 0.1
      */
     protected function _createValidationFailedException($message, $code = 0, \Exception $previous = null, $subject = null, $validationErrors = array())
     {
@@ -37,7 +37,7 @@ abstract class AbstractValidatorBase extends AbstractValidator implements Valida
     /**
      * {@inheritdoc}
      *
-     * @since [*next-version*]
+     * @since 0.1
      */
     public function validate($subject)
     {

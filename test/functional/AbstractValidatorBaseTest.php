@@ -7,14 +7,14 @@ use Xpmock\TestCase;
 /**
  * Tests {@see \Dhii\Validation\AbstractValidatorBase}.
  *
- * @since [*next-version*]
+ * @since 0.1
  */
 class AbstractValidatorBaseTest extends TestCase
 {
     /**
      * The class name of the test subject.
      *
-     * @since [*next-version*]
+     * @since 0.1
      */
     const TEST_SUBJECT_CLASSNAME = 'Dhii\\Validation\\AbstractValidatorBase';
 
@@ -23,7 +23,7 @@ class AbstractValidatorBaseTest extends TestCase
      *
      * It will validate any boolean true value; all other values are invalid.
      *
-     * @since [*next-version*]
+     * @since 0.1
      *
      * @return AbstractValidator
      */
@@ -46,7 +46,7 @@ class AbstractValidatorBaseTest extends TestCase
     /**
      * Tests whether a valid instance of the test subject can be created.
      *
-     * @since [*next-version*]
+     * @since 0.1
      */
     public function testCanBeCreated()
     {
@@ -58,7 +58,7 @@ class AbstractValidatorBaseTest extends TestCase
     /**
      * Tests whether valid values pass validation.
      *
-     * @since [*next-version*]
+     * @since 0.1
      */
     public function testValidateSuccess()
     {
@@ -73,7 +73,7 @@ class AbstractValidatorBaseTest extends TestCase
      *
      * @expectedException \Dhii\Validation\Exception\ValidationFailedException
      *
-     * @since [*next-version*]
+     * @since 0.1
      */
     public function testValidateFailed()
     {
@@ -86,7 +86,7 @@ class AbstractValidatorBaseTest extends TestCase
     /**
      * Tests that the validation exception gets created correctly.
      *
-     * @since [*next-version*]
+     * @since 0.1
      */
     public function testCreateValidationException()
     {
@@ -107,7 +107,7 @@ class AbstractValidatorBaseTest extends TestCase
     /**
      * Tests that the validation exception gets created correctly.
      *
-     * @since [*next-version*]
+     * @since 0.1
      */
     public function testCreateValidationFailedException()
     {
