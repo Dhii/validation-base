@@ -5,3 +5,7 @@
 [![Latest Stable Version](https://poser.pugx.org/dhii/validation-base/version)](https://packagist.org/packages/dhii/validation-base)
 
 Base concrete functionality for validation.
+
+This package complies with [Dhii] standards.
+
+[Dhii]: https://github.com/Dhii/dhii
