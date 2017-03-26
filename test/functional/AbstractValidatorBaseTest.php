@@ -69,9 +69,7 @@ class AbstractValidatorBaseTest extends TestCase
     }
 
     /**
-     * Tests whether invalid values do not pass validation.
-     *
-     * @expectedException \Dhii\Validation\Exception\ValidationFailedException
+     * Tests whether invalid values do not pass validation
      *
      * @since 0.1
      */
@@ -79,6 +77,7 @@ class AbstractValidatorBaseTest extends TestCase
     {
         $subject = $this->createInstance();
 
+        $this->setExpectedException('Dhii\\Validation\\Exception\\ValidationFailedException');
         $subject->validate(false);
         $this->assertTrue(false, 'Invalid subject passed validation');
     }
