@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "29d879181aee9cafb9d6de57f0e100ea",
+    "content-hash": "2bf102a67f674c7015ee38d7475af8a1",
     "packages": [
         {
             "name": "dhii/validation-abstract",
-            "version": "v0.1",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/validation-abstract.git",
-                "reference": "ff8fc7068b6511ae2cdd300c74bf9b7bfabc61c2"
+                "reference": "287d390bcf1fffa623e48a93607b4c38d7abb04a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/validation-abstract/zipball/ff8fc7068b6511ae2cdd300c74bf9b7bfabc61c2",
-                "reference": "ff8fc7068b6511ae2cdd300c74bf9b7bfabc61c2",
+                "url": "https://api.github.com/repos/Dhii/validation-abstract/zipball/287d390bcf1fffa623e48a93607b4c38d7abb04a",
+                "reference": "287d390bcf1fffa623e48a93607b4c38d7abb04a",
                 "shasum": ""
             },
             "require": {
@@ -55,10 +55,10 @@
             ],
             "description": "Common abstract functionality for validation.",
             "support": {
-                "source": "https://github.com/Dhii/validation-abstract/tree/v0.1",
+                "source": "https://github.com/Dhii/validation-abstract/tree/develop",
                 "issues": "https://github.com/Dhii/validation-abstract/issues"
             },
-            "time": "2017-03-26T15:18:42+00:00"
+            "time": "2017-06-13 11:19:27"
         },
         {
             "name": "dhii/validation-interface",
@@ -1243,7 +1243,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2017-05-22T07:24:03+00:00"
+            "time": "2017-05-22 07:24:03"
         },
         {
             "name": "sebastian/environment",
@@ -2114,6 +2114,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "dhii/validation-abstract": 20,
         "dhii/php-cs-fixer-config": 20
     },
     "prefer-stable": false,
