@@ -3,6 +3,7 @@
 namespace Dhii\Validation\FuncTest;
 
 use Xpmock\TestCase;
+use Dhii\Validation\Exception\ValidationFailedExceptionInterface;
 
 /**
  * Tests {@see \Dhii\Validation\AbstractValidatorBase}.
@@ -77,8 +78,13 @@ class AbstractValidatorBaseTest extends TestCase
     {
         $subject = $this->createInstance();
 
-        $this->setExpectedException('Dhii\\Validation\\Exception\\ValidationFailedException');
-        $subject->validate(false);
+        try {
+            $subject->validate(false);
+        } catch (ValidationFailedExceptionInterface $e) {
+            $this->assertNotEmpty($e->getValidationErrors(), 'Validation exception must provide some error messages');
+            return;
+        }
+
         $this->assertTrue(false, 'Invalid subject passed validation');
     }
 
