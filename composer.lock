@@ -4,8 +4,98 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfdc7315b11dd871ae198472351010a9",
+    "content-hash": "9fafda0bbe830707f989825a43315511",
     "packages": [
+        {
+            "name": "dhii/exception",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dhii/exception.git",
+                "reference": "160d0f5086982fe43d963ea9a1c60c3c2bdf4169"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dhii/exception/zipball/160d0f5086982fe43d963ea9a1c60c3c2bdf4169",
+                "reference": "160d0f5086982fe43d963ea9a1c60c3c2bdf4169",
+                "shasum": ""
+            },
+            "require": {
+                "dhii/exception-interface": "^0.1",
+                "php": "^5.4 | ^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "<=0.3.2",
+                "dhii/php-cs-fixer-config": "^0.1",
+                "phpunit/phpunit": "^4.8",
+                "ptrofimov/xpmock": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dhii\\Exception\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dhii Team",
+                    "email": "development@dhii.co"
+                }
+            ],
+            "description": "Standards-compliant exception classes",
+            "time": "2017-09-05 08:24:01"
+        },
+        {
+            "name": "dhii/exception-helper-base",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dhii/exception-helper-base.git",
+                "reference": "9275a60ef9940edaf2442e673ddf3035cdefbdeb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dhii/exception-helper-base/zipball/9275a60ef9940edaf2442e673ddf3035cdefbdeb",
+                "reference": "9275a60ef9940edaf2442e673ddf3035cdefbdeb",
+                "shasum": ""
+            },
+            "require": {
+                "dhii/exception": "dev-develop",
+                "php": "^5.4 | ^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "<=0.3.2",
+                "dhii/php-cs-fixer-config": "^0.1",
+                "dhii/stringable-interface": "^0.1",
+                "phpunit/phpunit": "^4.8",
+                "ptrofimov/xpmock": "^1.1"
+            },
+            "suggest": {
+                "dhii/stringable-interface": "To be able to pass stringables instead of strings in some cases"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dhii\\Exception\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dhii Team",
+                    "email": "development@dhii.co"
+                }
+            ],
+            "description": "Base functionality for exception helpers",
+            "time": "2017-09-05 07:47:07"
+        },
         {
             "name": "dhii/exception-interface",
             "version": "v0.1",
@@ -184,12 +274,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/validation-abstract.git",
-                "reference": "22bc43022def713709b032faf3e87d2c056ec9bc"
+                "reference": "ce4c061dee0b806572dcd77efa4d0cd24fae2893"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/validation-abstract/zipball/22bc43022def713709b032faf3e87d2c056ec9bc",
-                "reference": "22bc43022def713709b032faf3e87d2c056ec9bc",
+                "url": "https://api.github.com/repos/Dhii/validation-abstract/zipball/ce4c061dee0b806572dcd77efa4d0cd24fae2893",
+                "reference": "ce4c061dee0b806572dcd77efa4d0cd24fae2893",
                 "shasum": ""
             },
             "require": {
@@ -223,7 +313,7 @@
                 }
             ],
             "description": "Common abstract functionality for validation.",
-            "time": "2017-09-04 18:03:45"
+            "time": "2017-09-05 11:14:52"
         },
         {
             "name": "dhii/validation-interface",
@@ -2297,6 +2387,7 @@
         "dhii/validation-interface": 20,
         "dhii/validation-abstract": 20,
         "dhii/i18n-helper-base": 20,
+        "dhii/exception-helper-base": 20,
         "dhii/php-cs-fixer-config": 20
     },
     "prefer-stable": true,
