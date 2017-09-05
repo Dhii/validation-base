@@ -14,7 +14,8 @@
     "require": {
         "php": "^5.3 | ^7.0",
         "dhii/validation-interface": "dev-task/customize-validation-logic as 0.1",
-        "dhii/validation-abstract": "dev-task/8-bring-up-to-standard as 0.1"
+        "dhii/validation-abstract": "dev-task/8-bring-up-to-standard as 0.1",
+        "dhii/i18n-helper-base": "dev-develop"
     },
     "require-dev": {
         "dhii/php-cs-fixer-config": "dev-php-5.3",
