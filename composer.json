@@ -10,9 +10,10 @@
         }
     ],
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^5.3 | ^7.0",
-        "dhii/validation-interface": "^0.1",
+        "dhii/validation-interface": "dev-develop",
         "dhii/validation-abstract": "dev-develop"
     },
     "require-dev": {
@@ -29,12 +30,5 @@
     "scripts": {
         "test": "phpunit",
         "csfix": "php-cs-fixer fix -vvv"
-    },
-
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Dhii/validation-abstract"
-        }
-    ]
+    }
 }
