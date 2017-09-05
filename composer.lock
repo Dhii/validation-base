@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3965bb80e219292b869eaf77c372bd7a",
+    "content-hash": "dcbd4762a39dea69568ca8a1b07df863",
     "packages": [
         {
             "name": "dhii/exception-interface",
@@ -93,16 +93,16 @@
         },
         {
             "name": "dhii/validation-abstract",
-            "version": "dev-develop",
+            "version": "dev-task/8-bring-up-to-standard",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/validation-abstract.git",
-                "reference": "3399dbf8b94610a61ae341b02e317919153bd86d"
+                "reference": "22bc43022def713709b032faf3e87d2c056ec9bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/validation-abstract/zipball/3399dbf8b94610a61ae341b02e317919153bd86d",
-                "reference": "3399dbf8b94610a61ae341b02e317919153bd86d",
+                "url": "https://api.github.com/repos/Dhii/validation-abstract/zipball/22bc43022def713709b032faf3e87d2c056ec9bc",
+                "reference": "22bc43022def713709b032faf3e87d2c056ec9bc",
                 "shasum": ""
             },
             "require": {
@@ -111,6 +111,7 @@
             "require-dev": {
                 "codeclimate/php-test-reporter": "<=0.3.2",
                 "dhii/php-cs-fixer-config": "dev-php-5.3",
+                "dhii/stringable-interface": "^0.1",
                 "dhii/validation-interface": "^0.1",
                 "phpunit/phpunit": "^4.8",
                 "ptrofimov/xpmock": "^1.1"
@@ -135,20 +136,20 @@
                 }
             ],
             "description": "Common abstract functionality for validation.",
-            "time": "2017-08-19 08:43:00"
+            "time": "2017-09-04 18:03:45"
         },
         {
             "name": "dhii/validation-interface",
-            "version": "dev-develop",
+            "version": "dev-task/customize-validation-logic",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/validation-interface.git",
-                "reference": "0fb2ba786041311a969f3e29f39ecce80050bfa1"
+                "reference": "2d602bd8d9b507444a818d9f06d73c230a7d8011"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/validation-interface/zipball/0fb2ba786041311a969f3e29f39ecce80050bfa1",
-                "reference": "0fb2ba786041311a969f3e29f39ecce80050bfa1",
+                "url": "https://api.github.com/repos/Dhii/validation-interface/zipball/2d602bd8d9b507444a818d9f06d73c230a7d8011",
+                "reference": "2d602bd8d9b507444a818d9f06d73c230a7d8011",
                 "shasum": ""
             },
             "require": {
@@ -156,6 +157,7 @@
                 "php": "^5.3 | ^7.0"
             },
             "require-dev": {
+                "codeclimate/php-test-reporter": "<=0.3.2",
                 "dhii/php-cs-fixer-config": "dev-php-5.3",
                 "phpunit/phpunit": "^4.8",
                 "ptrofimov/xpmock": "^1.1"
@@ -177,7 +179,7 @@
                 }
             ],
             "description": "A base interface for validators",
-            "time": "2017-09-04 16:58:38"
+            "time": "2017-09-04 17:05:39"
         }
     ],
     "packages-dev": [
@@ -2189,7 +2191,20 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "0.1",
+            "alias_normalized": "0.1.0.0",
+            "version": "dev-task/customize-validation-logic",
+            "package": "dhii/validation-interface"
+        },
+        {
+            "alias": "0.1",
+            "alias_normalized": "0.1.0.0",
+            "version": "dev-task/8-bring-up-to-standard",
+            "package": "dhii/validation-abstract"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "dhii/validation-interface": 20,
