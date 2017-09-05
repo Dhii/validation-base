@@ -2,6 +2,15 @@
 
 namespace Dhii\Validation\Exception;
 
+use Traversable;
+use Exception as RootException;
+use Dhii\Util\String\StringableInterface as Stringable;
+use Dhii\Validation\ValidationSubjectAwareTrait;
+use Dhii\Validation\ValidatorAwareTrait;
+use Dhii\Validation\ValidationErrorsAwareTrait;
+use Dhii\I18n\StringTranslatingTrait;
+use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
+
 /**
  * Represents an exception that occurs when a subject is determined to be invalid.
  *
@@ -9,27 +18,56 @@ namespace Dhii\Validation\Exception;
  */
 class ValidationFailedException extends AbstractValidationFailedException implements ValidationFailedExceptionInterface
 {
+    /*
+     * Adds validation subject awareness.
+     *
+     * @since [*next-version*]
+     */
+    use ValidationSubjectAwareTrait;
+
+    /*
+     * Adds validator awareness.
+     *
+     * @since [*next-version*]
+     */
+    use ValidatorAwareTrait;
+
+    /*
+     * Adds dummy internationalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use StringTranslatingTrait;
+
+    /*
+     * Adds functionality for creating invalid argument exceptions.
+     *
+     * @since [*next-version*]
+     */
+    use CreateInvalidArgumentExceptionCapableTrait;
+
+    /*
+     * Adds validation errors awareness.
+     *
+     * @since [*next-version*]
+     */
+    use ValidationErrorsAwareTrait;
+
     /**
      * @since 0.1
      *
-     * @param string[]|StringableInterface[]|\Traversable $validationErrors The validation errors to associate with this instance.
+     * @param string|Stringable|null                 $message          The error message, if any.
+     * @param int|null                               $code             The error code, if any.
+     * @param RootException|null                     $previous         The inner exception, if any.
+     * @param mixed|null                             $subject          The validation subject, if any.
+     * @param string[]|Stringable[]|Traversable|null $validationErrors The validation errors to associate with this instance.
      */
-    public function __construct($message = '', $code = 0, \Exception $previous = null, $subject = null, $validationErrors = array())
+    public function __construct($message = null, $code = null, RootException $previous = null, $subject = null, $validationErrors = null)
     {
-        parent::__construct($message, $code, $previous);
+        parent::__construct((string) $message, (int) $code, $previous);
 
         $this->_setValidationSubject($subject);
         $this->_setValidationErrors($validationErrors);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @since 0.1
-     */
-    protected function _createValidationException($message, $code = 0, \Exception $previous = null)
-    {
-        return new ValidationException($message, $code, $previous);
     }
 
     /**
@@ -50,5 +88,15 @@ class ValidationFailedException extends AbstractValidationFailedException implem
     public function getValidationErrors()
     {
         return $this->_getValidationErrors();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    public function getValidator()
+    {
+        return $this->_getValidator();
     }
 }

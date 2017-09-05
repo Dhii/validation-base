@@ -3,10 +3,10 @@
 namespace Dhii\Validation\FuncTest;
 
 use Xpmock\TestCase;
-use Dhii\Validation\Exception\ValidationException;
+use Dhii\Validation\Exception\ValidationException as TestSubject;
 
 /**
- * Tests {@see \Dhii\Validation\Exception\ValidationException}.
+ * Tests {@see TestSubject}.
  *
  * @since 0.1
  */
@@ -17,20 +17,19 @@ class ValidationExceptionTest extends TestCase
      *
      * @since 0.1
      */
-    const TEST_SUBJECT_CLASSNAME = 'Dhii\\Validation\\Exception\\ValidationException';
+    const TEST_SUBJECT_CLASSNAME = 'Dhii\Validation\Exception\ValidationException';
 
     /**
      * Creates a new instance of the test subject.
      *
      * @since 0.1
      *
-     * @return ValidationException
+     * @return TestSubject
      */
-    public function createInstance($message = '')
+    public function createInstance($message = null, $code = null, $inner = null)
     {
-        $me = $this;
         $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
-                ->new($message);
+                ->new($message, $code, $inner);
 
         return $mock;
     }

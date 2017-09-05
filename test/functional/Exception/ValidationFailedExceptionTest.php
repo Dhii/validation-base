@@ -3,10 +3,10 @@
 namespace Dhii\Validation\FuncTest;
 
 use Xpmock\TestCase;
-use Dhii\Validation\Exception\ValidationFailedException;
+use Dhii\Validation\Exception\ValidationFailedException as TestSubject;
 
 /**
- * Tests {@see \Dhii\Validation\Exception\ValidationFailedException}.
+ * Tests {@see TestSubject}.
  *
  * @since 0.1
  */
@@ -17,20 +17,19 @@ class ValidationFailedExceptionTest extends TestCase
      *
      * @since 0.1
      */
-    const TEST_SUBJECT_CLASSNAME = 'Dhii\\Validation\\Exception\\ValidationFailedException';
+    const TEST_SUBJECT_CLASSNAME = 'Dhii\Validation\Exception\ValidationFailedException';
 
     /**
      * Creates a new instance of the test subject.
      *
      * @since 0.1
      *
-     * @return ValidationFailedException
+     * @return TestSubject
      */
-    public function createInstance($message = '', $subject = null, $validationErrors = array())
+    public function createInstance($message = null, $code = null, $inner = null, $subject = null, $validationErrors = null)
     {
-        $me = $this;
         $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
-                ->new($message, 0, null, $subject, $validationErrors);
+                ->new($message, $code, $inner, $subject, $validationErrors);
 
         return $mock;
     }
@@ -57,29 +56,8 @@ class ValidationFailedExceptionTest extends TestCase
         $value = 'banana';
         $errors = array('orange', 'pineapple');
 
-        $subject = $this->createInstance('', $value, $errors);
+        $subject = $this->createInstance(null, null, null, $value, $errors);
         $this->assertEquals($value, $subject->getSubject(), 'Validation subject could not be correctly retrieved');
         $this->assertEquals($errors, $subject->getValidationErrors(), 'Validation errors could not be correctly retrieved');
-    }
-
-    /**
-     * Tests that the validation exception gets created correctly.
-     *
-     * @since 0.1
-     */
-    public function testCreateValidationException()
-    {
-        $message = 'apple';
-        $inner = new \Exception();
-        $code = 123;
-        $subject = $this->createInstance();
-        $reflection = $this->reflect($subject);
-
-        $exception = $reflection->_createValidationException($message, $code, $inner);
-        /* @var $exception \Dhii\Validation\Exception\ValidationException */
-        $this->assertInstanceOf('Dhii\\Validation\\Exception\\ValidationExceptionInterface', $exception, 'Created exception is not a valid validation exception');
-        $this->assertEquals($message, $exception->getMessage(), 'Created exception does not have the correct message');
-        $this->assertEquals($code, $exception->getCode(), 'Created exception does not have the correct code');
-        $this->assertEquals($inner, $exception->getPrevious(), 'Created exception does not have the correct inner exception');
     }
 }

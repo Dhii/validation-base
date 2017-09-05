@@ -2,6 +2,7 @@
 
 namespace Dhii\Validation;
 
+use Exception as RootException;
 use Dhii\Validation\Exception\ValidationException;
 use Dhii\Validation\Exception\ValidationFailedException;
 
@@ -19,7 +20,7 @@ abstract class AbstractValidatorBase extends AbstractValidator implements Valida
      *
      * @since 0.1
      */
-    protected function _createValidationException($message, $code = 0, \Exception $previous = null)
+    protected function _createValidationException($message = null, $code = null, RootException $previous = null)
     {
         return new ValidationException($message, $code, $previous);
     }
@@ -29,7 +30,7 @@ abstract class AbstractValidatorBase extends AbstractValidator implements Valida
      *
      * @since 0.1
      */
-    protected function _createValidationFailedException($message, $code = 0, \Exception $previous = null, $subject = null, $validationErrors = array())
+    protected function _createValidationFailedException($message = null, $code = null, RootException $previous = null, $subject = null, $validationErrors = null)
     {
         return new ValidationFailedException($message, $code, $previous, $subject, $validationErrors);
     }
