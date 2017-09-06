@@ -26,10 +26,10 @@ class ValidationExceptionTest extends TestCase
      *
      * @return TestSubject
      */
-    public function createInstance($message = null, $code = null, $inner = null)
+    public function createInstance($message = null, $code = null, $inner = null, $validator = null)
     {
         $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
-                ->new($message, $code, $inner);
+                ->new($message, $code, $inner, $validator);
 
         return $mock;
     }
