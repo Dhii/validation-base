@@ -3,7 +3,9 @@
 namespace Dhii\Validation\FuncTest;
 
 use Xpmock\TestCase;
+use Exception as RootException;
 use Dhii\Validation\Exception\ValidationFailedException as TestSubject;
+use Dhii\Validation\ValidatorInterface;
 
 /**
  * Tests {@see TestSubject}.
@@ -47,6 +49,35 @@ class ValidationFailedExceptionTest extends TestCase
     }
 
     /**
+     * Creates a new validator instance.
+     *
+     * @since [*next-version*]
+     *
+     * @return ValidatorInterface The new validator.
+     */
+    protected function _createValidator()
+    {
+        $mock = $this->mock('Dhii\Validation\ValidatorInterface')
+                ->validate()
+                ->new();
+
+        return $mock;
+    }
+
+    /**
+     * Creates a new exception instance.
+     *
+     * @since [*next-version*]
+     *
+     * @param string $message The exception message
+     * @return RootException The new exception.
+     */
+    protected function _createException($message = '')
+    {
+        return new RootException($message);
+    }
+
+    /**
      * Tests that passed data can be correctly retrieved from instances.
      *
      * @since 0.1
@@ -54,9 +85,17 @@ class ValidationFailedExceptionTest extends TestCase
     public function testAttributes()
     {
         $value = 'banana';
+        $validator = $this->_createValidator();
         $errors = array('orange', 'pineapple');
+        $message = uniqid('message-');
+        $code = rand(0, 100);
+        $inner = $this->_createException();
 
-        $subject = $this->createInstance(null, null, null, $value, $errors);
+        $subject = $this->createInstance($message, $code, $inner, $validator, $value, $errors);
+        $this->assertEquals($message, $subject->getMessage(), 'Error message could not be correctly retrieved');
+        $this->assertEquals($code, $subject->getCode(), 'Error code could not be correctly retrieved');
+        $this->assertEquals($inner, $subject->getPrevious(), 'Inner exception could not be correctly retrieved');
+        $this->assertSame($validator, $subject->getValidator(), 'Validator could not be correctly retrieved');
         $this->assertEquals($value, $subject->getSubject(), 'Validation subject could not be correctly retrieved');
         $this->assertEquals($errors, $subject->getValidationErrors(), 'Validation errors could not be correctly retrieved');
     }
