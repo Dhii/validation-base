@@ -26,10 +26,10 @@ class ValidationFailedExceptionTest extends TestCase
      *
      * @return TestSubject
      */
-    public function createInstance($message = null, $code = null, $inner = null, $subject = null, $validationErrors = null)
+    public function createInstance($message = null, $code = null, $inner = null, $validator = null, $subject = null, $validationErrors = null)
     {
         $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
-                ->new($message, $code, $inner, $subject, $validationErrors);
+                ->new($message, $code, $inner, $validator, $subject, $validationErrors);
 
         return $mock;
     }
