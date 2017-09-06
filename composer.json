@@ -13,7 +13,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^5.3 | ^7.0",
-        "dhii/validation-interface": "dev-task/customize-validation-logic as 0.1",
+        "dhii/validation-interface": "dev-release/0.2",
         "dhii/validation-abstract": "dev-task/8-bring-up-to-standard as 0.1",
         "dhii/i18n-helper-base": "dev-develop",
         "dhii/exception-helper-base": "dev-develop"
