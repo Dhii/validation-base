@@ -10,6 +10,7 @@ use Dhii\Validation\ValidatorAwareTrait;
 use Dhii\Validation\ValidationErrorsAwareTrait;
 use Dhii\I18n\StringTranslatingTrait;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
+use Dhii\Validation\ValidatorInterface;
 
 /**
  * Represents an exception that occurs when a subject is determined to be invalid.
@@ -59,15 +60,18 @@ class ValidationFailedException extends AbstractValidationFailedException implem
      * @param string|Stringable|null                 $message          The error message, if any.
      * @param int|null                               $code             The error code, if any.
      * @param RootException|null                     $previous         The inner exception, if any.
+     * @param ValidatorInterface|null                $validator        The validator, if any.
      * @param mixed|null                             $subject          The validation subject, if any.
      * @param string[]|Stringable[]|Traversable|null $validationErrors The validation errors to associate with this instance.
      */
-    public function __construct($message = null, $code = null, RootException $previous = null, $subject = null, $validationErrors = null)
+    public function __construct($message = null, $code = null, RootException $previous = null, $validator = null, $subject = null, $validationErrors = null)
     {
         parent::__construct((string) $message, (int) $code, $previous);
 
+        $this->_setValidator($validator);
         $this->_setValidationSubject($subject);
         $this->_setValidationErrors($validationErrors);
+        $this->_construct();
     }
 
     /**
