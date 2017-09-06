@@ -40,6 +40,7 @@ class AbstractValidatorBaseTest extends TestCase
                     return array();
                 })
                 ->__()
+                ->_countIterable(function ($iterable) { return count($iterable); })
                 ->new();
 
         return $mock;
