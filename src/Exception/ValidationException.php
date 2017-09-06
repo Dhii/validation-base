@@ -6,6 +6,7 @@ use Exception as RootException;
 use Dhii\Validation\ValidatorAwareTrait;
 use Dhii\I18n\StringTranslatingTrait;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
+use Dhii\Validation\ValidatorInterface;
 
 /**
  * Represents an exception which occurs inside of or related to a validation
@@ -39,13 +40,16 @@ class ValidationException extends AbstractValidationException implements Validat
     /**
      * @since [*next-version*]
      *
-     * @param string|Stringable|null $message  The error message, if any.
-     * @param int|null               $code     The error code, if any.
-     * @param RootException|null     $previous The inner exception, if any.
+     * @param string|Stringable|null  $message   The error message, if any.
+     * @param int|null                $code      The error code, if any.
+     * @param RootException|null      $previous  The inner exception, if any.
+     * @param ValidatorInterface|null $validator The validator, if any.
      */
-    public function __construct($message = null, $code = null, RootException $previous = null, $subject = null, $validationErrors = null)
+    public function __construct($message = null, $code = null, RootException $previous = null, $validator = null)
     {
         parent::__construct((string) $message, (int) $code, $previous);
+        $this->_setValidator($validator);
+        $this->_construct();
     }
 
     /**
