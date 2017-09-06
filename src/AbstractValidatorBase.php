@@ -22,7 +22,7 @@ abstract class AbstractValidatorBase extends AbstractValidator implements Valida
      */
     protected function _createValidationException($message = null, $code = null, RootException $previous = null)
     {
-        return new ValidationException($message, $code, $previous);
+        return new ValidationException($message, $code, $previous, $this);
     }
 
     /**
@@ -32,7 +32,7 @@ abstract class AbstractValidatorBase extends AbstractValidator implements Valida
      */
     protected function _createValidationFailedException($message = null, $code = null, RootException $previous = null, $subject = null, $validationErrors = null)
     {
-        return new ValidationFailedException($message, $code, $previous, $subject, $validationErrors);
+        return new ValidationFailedException($message, $code, $previous, $this, $subject, $validationErrors);
     }
 
     /**
