@@ -2,6 +2,8 @@
 
 namespace Dhii\Validation;
 
+use Traversable;
+use Countable;
 use Exception as RootException;
 use Dhii\Validation\Exception\ValidationException;
 use Dhii\Validation\Exception\ValidationFailedException;
@@ -43,5 +45,21 @@ abstract class AbstractValidatorBase extends AbstractValidator implements Valida
     public function validate($subject)
     {
         $this->_validate($subject);
+    }
+
+    /**
+     * Counts the elements in an iterable.
+     *
+     * @since [*next-version*]
+     *
+     * @param array|Traversable $iterable The iterable to count. Must be finite.
+     */
+    protected function _countIterable($iterable)
+    {
+        $count = is_array($iterable) || $iterable instanceof Countable
+                ? count($iterable)
+                : iterator_count($iterable);
+
+        return $count;
     }
 }
