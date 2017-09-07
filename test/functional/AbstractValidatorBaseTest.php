@@ -3,6 +3,8 @@
 namespace Dhii\Validation\FuncTest;
 
 use Xpmock\TestCase;
+use ArrayIterator;
+use InfiniteIterator;
 use Dhii\Validation\Exception\ValidationFailedExceptionInterface;
 use Dhii\Validation\AbstractValidatorBase as TestSubject;
 
@@ -29,18 +31,21 @@ class AbstractValidatorBaseTest extends TestCase
      *
      * @return TestSubject
      */
-    public function createInstance()
+    public function createInstance($errorsFactory = null)
     {
-        $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
-                ->_getValidationErrors(function ($subject) {
-                    if ($subject !== true) {
-                        return array('Subject must be a boolean `true` value');
-                    }
+        if ($errorsFactory === null) {
+            $errorsFactory = function ($subject) {
+                if ($subject !== true) {
+                    return array('Subject must be a boolean `true` value');
+                }
 
-                    return array();
-                })
+                return array();
+            };
+        }
+
+        $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
+                ->_getValidationErrors($errorsFactory)
                 ->__()
-                ->_countIterable(function ($iterable) { return count($iterable); })
                 ->new();
 
         return $mock;
@@ -135,5 +140,58 @@ class AbstractValidatorBaseTest extends TestCase
         $this->assertEquals($inner, $exception->getPrevious(), 'Created exception does not have the correct inner exception');
         $this->assertEquals($value, $exception->getSubject(), 'Created exception does not have the correct subject');
         $this->assertEquals($errors, $exception->getValidationErrors(), 'Created exception does not have the correct validation errors');
+    }
+
+    /**
+     * Tests whether failed validation throws if error list is a traversable and countable.
+     *
+     * @since [*next-version*]
+     */
+    public function testValidateListCountable()
+    {
+        $subject = $this->createInstance(function ($subject) {
+            return new ArrayIterator(['Error']);
+
+        });
+        $reflection = $this->reflect($subject);
+        $value = uniqid('subject-');
+
+        $this->setExpectedException('Dhii\Validation\Exception\ValidationFailedExceptionInterface');
+        $reflection->_validate($value);
+    }
+
+    /**
+     * Tests whether failed validation throws if error list is a traversable but not countable.
+     *
+     * @since [*next-version*]
+     */
+    public function testValidateListTraversable()
+    {
+        $subject = $this->createInstance(function ($subject) {
+            return new \RegexIterator(new ArrayIterator(['Error']), '/o/');
+        });
+        $reflection = $this->reflect($subject);
+        $value = uniqid('subject-');
+
+        $this->setExpectedException('Dhii\Validation\Exception\ValidationFailedExceptionInterface');
+        $reflection->_validate($value);
+    }
+
+    /**
+     * Tests whether failed validation throws if error list is infinite.
+     *
+     * @since [*next-version*]
+     */
+    public function testValidateListInfinite()
+    {
+        $this->markTestSkipped('Just illustrates how returning an infinite list of errors causes infinite loop');
+        $subject = $this->createInstance(function ($subject) {
+            return new InfiniteIterator(new ArrayIterator(['Error']));
+        });
+        $reflection = $this->reflect($subject);
+        $value = uniqid('subject-');
+
+        $this->setExpectedException('Dhii\Validation\Exception\ValidationFailedExceptionInterface');
+        $reflection->_validate($value);
     }
 }
