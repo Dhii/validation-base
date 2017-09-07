@@ -274,12 +274,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/validation-abstract.git",
-                "reference": "fa78c8246073b0700ae1af98507e26b8430a3efd"
+                "reference": "6a721570e5bf12ab7a37751aa099b05870e96944"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/validation-abstract/zipball/fa78c8246073b0700ae1af98507e26b8430a3efd",
-                "reference": "fa78c8246073b0700ae1af98507e26b8430a3efd",
+                "url": "https://api.github.com/repos/Dhii/validation-abstract/zipball/6a721570e5bf12ab7a37751aa099b05870e96944",
+                "reference": "6a721570e5bf12ab7a37751aa099b05870e96944",
                 "shasum": ""
             },
             "require": {
@@ -313,7 +313,7 @@
                 }
             ],
             "description": "Common abstract functionality for validation.",
-            "time": "2017-09-06 14:26:00"
+            "time": "2017-09-07 11:00:58"
         },
         {
             "name": "dhii/validation-interface",
