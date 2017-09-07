@@ -57,6 +57,7 @@ class ValidationExceptionTest extends TestCase
      * @since [*next-version*]
      *
      * @param string $message The exception message
+     *
      * @return RootException The new exception.
      */
     protected function _createException($message = '')
