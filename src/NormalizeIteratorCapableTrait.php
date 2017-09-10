@@ -54,7 +54,7 @@ trait NormalizeIteratorCapableTrait
      *
      * @return Iterator The iterator that will iterate over the array.
      */
-    abstract protected function _createArrayIterator($array);
+    abstract protected function _createArrayIterator(array $array);
 
     /**
      * Creates an iterator that will iterate over the given traversable.
@@ -65,5 +65,5 @@ trait NormalizeIteratorCapableTrait
      *
      * @return Iterator The iterator that will iterate over the traversable.
      */
-    abstract protected function _createTraversableIterator($traversable);
+    abstract protected function _createTraversableIterator(Traversable $traversable);
 }
