@@ -5,6 +5,7 @@ namespace Dhii\Validation;
 use Exception as RootException;
 use Dhii\Validation\Exception\ValidationException;
 use Dhii\Validation\Exception\ValidationFailedException;
+use Dhii\Iterator\CountIterableCapableTrait;
 
 /**
  * Base functionality for validators.
