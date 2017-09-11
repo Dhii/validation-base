@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee1724b7045214eba0a7b11c814e94a6",
+    "content-hash": "8e13e000de96347068b0d2cf8b987e1b",
     "packages": [
         {
             "name": "dhii/exception",
@@ -227,6 +227,49 @@
             "time": "2017-03-13T12:08:29+00:00"
         },
         {
+            "name": "dhii/iterator-helper-base",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dhii/iterator-helper-base.git",
+                "reference": "e6e99b50105b0551571681bbfaca39b55327818e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dhii/iterator-helper-base/zipball/e6e99b50105b0551571681bbfaca39b55327818e",
+                "reference": "e6e99b50105b0551571681bbfaca39b55327818e",
+                "shasum": ""
+            },
+            "require": {
+                "dhii/exception-helper-base": "dev-develop",
+                "php": "^5.4 | ^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "<=0.3.2",
+                "dhii/php-cs-fixer-config": "^0.1",
+                "phpunit/phpunit": "^4.8",
+                "ptrofimov/xpmock": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dhii\\Iterator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dhii Team",
+                    "email": "development@dhii.co"
+                }
+            ],
+            "description": "Common functionality for working with iterables",
+            "time": "2017-09-11 03:05:56"
+        },
+        {
             "name": "dhii/stringable-interface",
             "version": "v0.1",
             "source": {
@@ -274,12 +317,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/validation-abstract.git",
-                "reference": "6a721570e5bf12ab7a37751aa099b05870e96944"
+                "reference": "6e88d1c5841c0b264aaf7d811c66168c828084f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/validation-abstract/zipball/6a721570e5bf12ab7a37751aa099b05870e96944",
-                "reference": "6a721570e5bf12ab7a37751aa099b05870e96944",
+                "url": "https://api.github.com/repos/Dhii/validation-abstract/zipball/6e88d1c5841c0b264aaf7d811c66168c828084f4",
+                "reference": "6e88d1c5841c0b264aaf7d811c66168c828084f4",
                 "shasum": ""
             },
             "require": {
@@ -313,7 +356,7 @@
                 }
             ],
             "description": "Common abstract functionality for validation.",
-            "time": "2017-09-07 11:00:58"
+            "time": "2017-09-10 10:33:04"
         },
         {
             "name": "dhii/validation-interface",
@@ -2382,6 +2425,7 @@
         "dhii/validation-abstract": 20,
         "dhii/i18n-helper-base": 20,
         "dhii/exception-helper-base": 20,
+        "dhii/iterator-helper-base": 20,
         "dhii/php-cs-fixer-config": 20
     },
     "prefer-stable": true,
