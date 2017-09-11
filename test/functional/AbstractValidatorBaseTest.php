@@ -3,8 +3,6 @@
 namespace Dhii\Validation\FuncTest;
 
 use Xpmock\TestCase;
-use ArrayIterator;
-use InfiniteIterator;
 use Dhii\Validation\Exception\ValidationFailedExceptionInterface;
 use Dhii\Validation\AbstractValidatorBase as TestSubject;
 
