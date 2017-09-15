@@ -10,10 +10,14 @@
         }
     ],
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^5.3 | ^7.0",
-        "dhii/validation-interface": "^0.1",
-        "dhii/validation-abstract": "dev-develop"
+        "dhii/validation-interface": "dev-release/0.2",
+        "dhii/validation-abstract": "dev-task/8-bring-up-to-standard as 0.1",
+        "dhii/i18n-helper-base": "dev-develop",
+        "dhii/exception-helper-base": "dev-develop",
+        "dhii/iterator-helper-base": "dev-develop"
     },
     "require-dev": {
         "dhii/php-cs-fixer-config": "dev-php-5.3",
@@ -29,12 +33,5 @@
     "scripts": {
         "test": "phpunit",
         "csfix": "php-cs-fixer fix -vvv"
-    },
-
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Dhii/validation-abstract"
-        }
-    ]
+    }
 }

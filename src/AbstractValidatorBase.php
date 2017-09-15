@@ -2,8 +2,10 @@
 
 namespace Dhii\Validation;
 
+use Exception as RootException;
 use Dhii\Validation\Exception\ValidationException;
 use Dhii\Validation\Exception\ValidationFailedException;
+use Dhii\Iterator\CountIterableCapableTrait;
 
 /**
  * Base functionality for validators.
@@ -14,14 +16,21 @@ use Dhii\Validation\Exception\ValidationFailedException;
  */
 abstract class AbstractValidatorBase extends AbstractValidator implements ValidatorInterface
 {
+    /*
+     * Adds iterator counting functionality.
+     *
+     * @since [*next-version*]
+     */
+    use CountIterableCapableTrait;
+
     /**
      * {@inheritdoc}
      *
      * @since 0.1
      */
-    protected function _createValidationException($message, $code = 0, \Exception $previous = null)
+    protected function _createValidationException($message = null, $code = null, RootException $previous = null)
     {
-        return new ValidationException($message, $code, $previous);
+        return new ValidationException($message, $code, $previous, $this);
     }
 
     /**
@@ -29,9 +38,9 @@ abstract class AbstractValidatorBase extends AbstractValidator implements Valida
      *
      * @since 0.1
      */
-    protected function _createValidationFailedException($message, $code = 0, \Exception $previous = null, $subject = null, $validationErrors = array())
+    protected function _createValidationFailedException($message = null, $code = null, RootException $previous = null, $subject = null, $validationErrors = null)
     {
-        return new ValidationFailedException($message, $code, $previous, $subject, $validationErrors);
+        return new ValidationFailedException($message, $code, $previous, $this, $subject, $validationErrors);
     }
 
     /**

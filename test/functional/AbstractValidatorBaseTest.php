@@ -4,9 +4,10 @@ namespace Dhii\Validation\FuncTest;
 
 use Xpmock\TestCase;
 use Dhii\Validation\Exception\ValidationFailedExceptionInterface;
+use Dhii\Validation\AbstractValidatorBase as TestSubject;
 
 /**
- * Tests {@see \Dhii\Validation\AbstractValidatorBase}.
+ * Tests {@see TestSubject}.
  *
  * @since 0.1
  */
@@ -17,7 +18,7 @@ class AbstractValidatorBaseTest extends TestCase
      *
      * @since 0.1
      */
-    const TEST_SUBJECT_CLASSNAME = 'Dhii\\Validation\\AbstractValidatorBase';
+    const TEST_SUBJECT_CLASSNAME = 'Dhii\Validation\AbstractValidatorBase';
 
     /**
      * Creates a new instance of the test subject.
@@ -26,19 +27,23 @@ class AbstractValidatorBaseTest extends TestCase
      *
      * @since 0.1
      *
-     * @return AbstractValidator
+     * @return TestSubject
      */
-    public function createInstance()
+    public function createInstance($errorsFactory = null)
     {
-        $me = $this;
-        $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
-                ->_getValidationErrors(function ($subject) {
-                    if ($subject !== true) {
-                        return array('Subject must be a boolean `true` value');
-                    }
+        if ($errorsFactory === null) {
+            $errorsFactory = function ($subject) {
+                if ($subject !== true) {
+                    return array('Subject must be a boolean `true` value');
+                }
 
-                    return array();
-                })
+                return array();
+            };
+        }
+
+        $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
+                ->_getValidationErrors($errorsFactory)
+                ->__()
                 ->new();
 
         return $mock;
@@ -70,7 +75,7 @@ class AbstractValidatorBaseTest extends TestCase
     }
 
     /**
-     * Tests whether invalid values do not pass validation
+     * Tests whether invalid values do not pass validation.
      *
      * @since 0.1
      */
@@ -82,6 +87,7 @@ class AbstractValidatorBaseTest extends TestCase
             $subject->validate(false);
         } catch (ValidationFailedExceptionInterface $e) {
             $this->assertNotEmpty($e->getValidationErrors(), 'Validation exception must provide some error messages');
+
             return;
         }
 
@@ -103,7 +109,7 @@ class AbstractValidatorBaseTest extends TestCase
 
         $exception = $reflection->_createValidationException($message, $code, $inner);
         /* @var $exception \Dhii\Validation\Exception\ValidationException */
-        $this->assertInstanceOf('Dhii\\Validation\\Exception\\ValidationExceptionInterface', $exception, 'Created exception is not a valid validation exception');
+        $this->assertInstanceOf('Dhii\Validation\Exception\ValidationExceptionInterface', $exception, 'Created exception is not a valid validation exception');
         $this->assertEquals($message, $exception->getMessage(), 'Created exception does not have the correct message');
         $this->assertEquals($code, $exception->getCode(), 'Created exception does not have the correct code');
         $this->assertEquals($inner, $exception->getPrevious(), 'Created exception does not have the correct inner exception');
@@ -126,7 +132,7 @@ class AbstractValidatorBaseTest extends TestCase
 
         $exception = $reflection->_createValidationFailedException($message, $code, $inner, $value, $errors);
         /* @var $exception \Dhii\Validation\Exception\ValidationFailedException */
-        $this->assertInstanceOf('Dhii\\Validation\\Exception\\ValidationFailedExceptionInterface', $exception, 'Created exception is not a valid validation failed exception');
+        $this->assertInstanceOf('Dhii\Validation\Exception\ValidationFailedExceptionInterface', $exception, 'Created exception is not a valid validation failed exception');
         $this->assertEquals($message, $exception->getMessage(), 'Created exception does not have the correct message');
         $this->assertEquals($code, $exception->getCode(), 'Created exception does not have the correct code');
         $this->assertEquals($inner, $exception->getPrevious(), 'Created exception does not have the correct inner exception');
