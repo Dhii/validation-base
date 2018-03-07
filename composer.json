@@ -16,6 +16,7 @@
         "dhii/validation-interface": "dev-release/0.2",
         "dhii/validation-abstract": "dev-develop",
         "dhii/i18n-helper-base": "dev-develop",
+        "dhii/exception": "0.1-alpha1",
         "dhii/exception-helper-base": "dev-develop",
         "dhii/iterator-helper-base": "dev-develop"
     },
