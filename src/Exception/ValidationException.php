@@ -7,6 +7,7 @@ use Dhii\Validation\ValidatorAwareTrait;
 use Dhii\I18n\StringTranslatingTrait;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Validation\ValidatorInterface;
+use Dhii\Util\String\StringableInterface as Stringable;
 
 /**
  * Represents an exception which occurs inside of or related to a validation
