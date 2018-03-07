@@ -9,7 +9,8 @@ Base concrete functionality for validation.
 
 ## Details
 This package defines concrete exceptions, and implements their factories in a
-validator specialization. It also provides a base for composite validators.
+validator specialization. It also provides a base for composite validators. All this allows quick creation
+of validators compliant with the Dhii [validation standard][dhii/validation-interface].
 
 ### Classes
 - [`AbstractValidatorBase`] - The base class for validators that perform a single validation.
@@ -29,4 +30,5 @@ and exposes aspects of the validation.
 [CreateValidationExceptionCapableTrait]:            src/CreateValidationExceptionCapableTrait.php
 [CreateValidationFailedExceptionCapableTrait]:      src/CreateValidationFailedExceptionCapableTrait.php
 
-[Dhii]: https://github.com/Dhii/dhii
+[Dhii]:                                             https://github.com/Dhii/dhii
+[dhii/validation-interface]:                        https://packagist.org/packages/dhii/validation-interface
