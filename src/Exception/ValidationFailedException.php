@@ -5,6 +5,7 @@ namespace Dhii\Validation\Exception;
 use Dhii\Exception\ExceptionTrait;
 use Traversable;
 use Exception as RootException;
+use RangeException;
 use Dhii\Util\String\StringableInterface as Stringable;
 use Dhii\Validation\ValidationSubjectAwareTrait;
 use Dhii\Validation\ValidatorAwareTrait;
@@ -16,7 +17,7 @@ use Dhii\Validation\ValidatorInterface;
  *
  * @since 0.1
  */
-class ValidationFailedException extends RootException implements ValidationFailedExceptionInterface
+class ValidationFailedException extends RangeException implements ValidationFailedExceptionInterface
 {
     /*
      * Adds validation subject awareness.
