@@ -32,6 +32,9 @@
     },
     "scripts": {
         "test": "phpunit",
-        "csfix": "php-cs-fixer fix -vvv"
+        "csfix": "php-cs-fixer fix -vvv",
+        "analyze": [
+            "phan --progress-bar --output-mode=text --output=test/phan-report.txt"
+        ]
     }
 }
