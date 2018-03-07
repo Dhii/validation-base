@@ -3,6 +3,7 @@
 namespace Dhii\Validation\Exception;
 
 use Dhii\Exception\ExceptionTrait;
+use Dhii\Util\Normalization\NormalizeIterableCapableTrait;
 use Traversable;
 use Exception as RootException;
 use RangeException;
@@ -46,6 +47,12 @@ class ValidationFailedException extends RangeException implements ValidationFail
      * @since [*next-version*]
      */
     use ExceptionTrait;
+
+    /* Normalization of iterables.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeIterableCapableTrait;
 
     /**
      * @since 0.1
