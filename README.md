@@ -17,11 +17,16 @@ validator specialization. It also provides a base for composite validators.
 - [`ValidationException`] - A concrete exception related to validation or a validator.
 - [`ValidationFailedException`] - A concrete exception that signals validation failure,
 and exposes aspects of the validation.
+- [`ValidatorTrait`][ValidatorTrait] - A group of traits commonly used for validation.
+- [`CreateValidationExceptionCapableTrait`][CreateValidationExceptionCapableTrait] - Validation exception factory.
+- [`CreateValidationFailedExceptionCapableTrait`][CreateValidationFailedExceptionCapableTrait] - Validation failed exception factory.
 
-
-[`AbstractValidatorBase`]:                  src/AbstractValidatorBase.php
-[`AbstractCompositeValidatorBase`]:         src/AbstractCompositeValidatorBase.php
-[`ValidationException`]:                    src/Exception/ValidationException.php
-[`ValidationFailedException`]:              src/Exception/ValidationFailedException.php
+[`AbstractValidatorBase`]:                          src/AbstractValidatorBase.php
+[`AbstractCompositeValidatorBase`]:                 src/AbstractCompositeValidatorBase.php
+[`ValidationException`]:                            src/Exception/ValidationException.php
+[`ValidationFailedException`]:                      src/Exception/ValidationFailedException.php
+[ValidatorTrait]:                                   src/ValidatorTrait.php
+[CreateValidationExceptionCapableTrait]:            src/CreateValidationExceptionCapableTrait.php
+[CreateValidationFailedExceptionCapableTrait]:      src/CreateValidationFailedExceptionCapableTrait.php
 
 [Dhii]: https://github.com/Dhii/dhii
