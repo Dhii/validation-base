@@ -46,6 +46,7 @@ class ValidationFailedExceptionTest extends TestCase
         $subject = $this->createInstance();
 
         $this->assertInstanceOf(static::TEST_SUBJECT_CLASSNAME, $subject, 'Could not create a valid instance');
+        $this->assertInstanceOf('Exception', $subject, 'Test subject is not a valid exception');
     }
 
     /**
