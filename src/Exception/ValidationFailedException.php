@@ -2,14 +2,13 @@
 
 namespace Dhii\Validation\Exception;
 
+use Dhii\Exception\ExceptionTrait;
 use Traversable;
 use Exception as RootException;
 use Dhii\Util\String\StringableInterface as Stringable;
 use Dhii\Validation\ValidationSubjectAwareTrait;
 use Dhii\Validation\ValidatorAwareTrait;
 use Dhii\Validation\ValidationErrorsAwareTrait;
-use Dhii\I18n\StringTranslatingTrait;
-use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Validation\ValidatorInterface;
 
 /**
@@ -17,7 +16,7 @@ use Dhii\Validation\ValidatorInterface;
  *
  * @since 0.1
  */
-class ValidationFailedException extends AbstractValidationFailedException implements ValidationFailedExceptionInterface
+class ValidationFailedException extends RootException implements ValidationFailedExceptionInterface
 {
     /*
      * Adds validation subject awareness.
@@ -34,25 +33,18 @@ class ValidationFailedException extends AbstractValidationFailedException implem
     use ValidatorAwareTrait;
 
     /*
-     * Adds dummy internationalization functionality.
-     *
-     * @since [*next-version*]
-     */
-    use StringTranslatingTrait;
-
-    /*
-     * Adds functionality for creating invalid argument exceptions.
-     *
-     * @since [*next-version*]
-     */
-    use CreateInvalidArgumentExceptionCapableTrait;
-
-    /*
      * Adds validation errors awareness.
      *
      * @since [*next-version*]
      */
     use ValidationErrorsAwareTrait;
+
+    /*
+     * Common exception functionality.
+     *
+     * @since [*next-version*]
+     */
+    use ExceptionTrait;
 
     /**
      * @since 0.1
@@ -66,12 +58,37 @@ class ValidationFailedException extends AbstractValidationFailedException implem
      */
     public function __construct($message = null, $code = null, RootException $previous = null, $validator = null, $subject = null, $validationErrors = null)
     {
-        parent::__construct((string) $message, (int) $code, $previous);
+        $this->_initBaseException($message, $code, $previous);
 
         $this->_setValidator($validator);
         $this->_setValidationSubject($subject);
         $this->_setValidationErrors($validationErrors);
         $this->_construct();
+    }
+
+    /**
+     * Parameter-less constructor.
+     *
+     * Invoke this in actual constructor.
+     *
+     * @since [*next-version*]
+     */
+    protected function _construct()
+    {
+    }
+
+    /**
+     * Calls the parent constructor.
+     *
+     * @param string $message The error message.
+     * @param int $code The error code.
+     * @param RootException $previous The inner exception, if any.
+     *
+     * @since [*next-version*]
+     */
+    protected function _initParent($message = '', $code = 0, RootException $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
     }
 
     /**
