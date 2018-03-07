@@ -2,35 +2,33 @@
 
 namespace Dhii\Validation;
 
-use Exception as RootException;
 use Dhii\Validation\Exception\ValidationException;
 use Dhii\Validation\Exception\ValidationFailedException;
-use Dhii\Iterator\CountIterableCapableTrait;
+use Dhii\Validation\Exception\ValidationFailedExceptionInterface;
+use Exception as RootException;
 
 /**
- * Base functionality for validators.
- * 
- * Currently, allows creation of concrete exceptions.
+ * Common functionality for validators.
  *
  * @since 0.1
  */
-abstract class AbstractValidatorBase extends AbstractValidator implements ValidatorInterface
+abstract class AbstractValidatorBase implements ValidatorInterface
 {
-    /*
-     * Adds iterator counting functionality.
+    /* Common validator dependencies.
      *
      * @since [*next-version*]
      */
-    use CountIterableCapableTrait;
+    use ValidatorTrait;
 
     /**
-     * {@inheritdoc}
+     * Parameter-less constructor.
      *
-     * @since 0.1
+     * Invoke this in actual constructor.
+     *
+     * @since [*next-version*]
      */
-    protected function _createValidationException($message = null, $code = null, RootException $previous = null)
+    protected function _construct()
     {
-        return new ValidationException($message, $code, $previous, $this);
     }
 
     /**
@@ -38,18 +36,59 @@ abstract class AbstractValidatorBase extends AbstractValidator implements Valida
      *
      * @since 0.1
      */
-    protected function _createValidationFailedException($message = null, $code = null, RootException $previous = null, $subject = null, $validationErrors = null)
+    public function validate($value)
     {
-        return new ValidationFailedException($message, $code, $previous, $this, $subject, $validationErrors);
+        try {
+            $this->_validate($value);
+        }
+        catch (RootException $e) {
+            if ($e instanceof ValidationFailedExceptionInterface) {
+                throw $e;
+            }
+
+            $this->_throwValidationException($this->__('Problem validating'), null, $e, true);
+        }
     }
 
     /**
-     * {@inheritdoc}
+     * {inheritdoc}
      *
-     * @since 0.1
+     * @since [*next-version*]
+     *
+     * @throws ValidationException
      */
-    public function validate($subject)
-    {
-        $this->_validate($subject);
+    protected function _throwValidationException(
+        $message = null,
+        $code = null,
+        RootException $previous = null,
+        $validator = null
+    ) {
+        if ($validator === true) {
+            $validator = $this;
+        }
+
+        throw $this->_createValidationException($message, $code, $previous, $validator);
+    }
+
+    /**
+     * {inheritdoc}
+     *
+     * @since [*next-version*]
+     *
+     * @throws ValidationFailedException
+     */
+    protected function _throwValidationFailedException(
+        $message = null,
+        $code = null,
+        RootException $previous = null,
+        $validator = null,
+        $subject = null,
+        $validationErrors = null
+    ) {
+        if ($validator === true) {
+            $validator = $this;
+        }
+
+        throw $this->_createValidationFailedException($message, $code, $previous, $validator, $subject, $validationErrors);
     }
 }
