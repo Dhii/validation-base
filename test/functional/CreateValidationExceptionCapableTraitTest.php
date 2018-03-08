@@ -2,9 +2,7 @@
 
 namespace Dhii\Validation\FuncTest;
 
-
 use Dhii\Validation\CreateValidationExceptionCapableTrait as TestSubject;
-
 use Dhii\Validation\ValidatorInterface;
 use Xpmock\TestCase;
 use Exception as RootException;

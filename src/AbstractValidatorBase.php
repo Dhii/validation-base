@@ -40,8 +40,7 @@ abstract class AbstractValidatorBase implements ValidatorInterface
     {
         try {
             $this->_validate($value);
-        }
-        catch (RootException $e) {
+        } catch (RootException $e) {
             if ($e instanceof ValidationFailedExceptionInterface) {
                 throw $e;
             }
@@ -51,7 +50,7 @@ abstract class AbstractValidatorBase implements ValidatorInterface
     }
 
     /**
-     * {inheritdoc}
+     * {inheritdoc}.
      *
      * @since [*next-version*]
      *
@@ -71,7 +70,7 @@ abstract class AbstractValidatorBase implements ValidatorInterface
     }
 
     /**
-     * {inheritdoc}
+     * {inheritdoc}.
      *
      * @since [*next-version*]
      *

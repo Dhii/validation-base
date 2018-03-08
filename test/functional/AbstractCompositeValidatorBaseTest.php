@@ -2,7 +2,6 @@
 
 namespace Dhii\Validation\FuncTest;
 
-use Dhii\Validation\Exception\ValidationFailedException;
 use IteratorAggregate;
 use Xpmock\TestCase;
 use ArrayIterator;
@@ -12,7 +11,6 @@ use Dhii\Validation\Exception\ValidationFailedExceptionInterface;
 use Dhii\Validation\AbstractCompositeValidatorBase as TestSubject;
 use Exception as RootException;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use PHPUnit_Framework_MockObject_MockBuilder as MockBuilder;
 
 /**
  * Tests {@see TestSubject}.
@@ -131,7 +129,7 @@ class AbstractCompositeValidatorBaseTest extends TestCase
      *
      * @since [*next-version*]
      *
-     * @param string $className      Name of the class for the mock to extend.
+     * @param string   $className      Name of the class for the mock to extend.
      * @param string[] $interfaceNames Names of the interfaces for the mock to implement.
      *
      * @return object The object that extends and implements the specified class and interfaces.
@@ -183,7 +181,7 @@ class AbstractCompositeValidatorBaseTest extends TestCase
     }
 
     /**
-     * Tests whether
+     * Tests whether.
      *
      * @since [*next-version*]
      */
@@ -212,8 +210,7 @@ class AbstractCompositeValidatorBaseTest extends TestCase
         $this->setExpectedException('Dhii\Validation\Exception\ValidationFailedExceptionInterface');
         try {
             $subject->validate($val);
-        }
-        catch (ValidationFailedExceptionInterface $e) {
+        } catch (ValidationFailedExceptionInterface $e) {
             $reasons = [];
             foreach ($e->getValidationErrors() as $_error) {
                 $reasons[] = $_error;

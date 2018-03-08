@@ -3,7 +3,6 @@
 namespace Dhii\Validation\FuncTest;
 
 use Dhii\Validation\ValidatorTrait as TestSubject;
-
 use Xpmock\TestCase;
 use Exception as RootException;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;

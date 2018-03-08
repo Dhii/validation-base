@@ -3,10 +3,6 @@
 namespace Dhii\Validation\Exception;
 
 use Exception as RootException;
-use RangeException;
-use Dhii\Validation\ValidatorAwareTrait;
-use Dhii\I18n\StringTranslatingTrait;
-use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Validation\ValidatorInterface;
 use Dhii\Util\String\StringableInterface as Stringable;
 

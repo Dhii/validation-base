@@ -19,10 +19,10 @@ trait CreateValidationFailedExceptionCapableTrait
      *
      * @since [*next-version*]
      *
-     * @param string|Stringable|null $message  The message, if any
-     * @param int|null               $code     The error code, if any.
-     * @param RootException|null     $previous The inner exception, if any.
-     * @param ValidatorInterface|null     $validator The validator which triggered the exception, if any.
+     * @param string|Stringable|null                 $message          The message, if any
+     * @param int|null                               $code             The error code, if any.
+     * @param RootException|null                     $previous         The inner exception, if any.
+     * @param ValidatorInterface|null                $validator        The validator which triggered the exception, if any.
      * @param mixed|null                             $subject          The subject that has failed validation, if any.
      * @param string[]|Stringable[]|Traversable|null $validationErrors The errors that are to be associated with the new exception, if any.
      *
@@ -36,7 +36,6 @@ trait CreateValidationFailedExceptionCapableTrait
         $subject = null,
         $validationErrors = null
     ) {
-
         return new ValidationFailedException($message, $code, $previous, $validator, $subject, $validationErrors);
     }
 }

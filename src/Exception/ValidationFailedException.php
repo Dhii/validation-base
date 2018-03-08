@@ -88,8 +88,8 @@ class ValidationFailedException extends RangeException implements ValidationFail
     /**
      * Calls the parent constructor.
      *
-     * @param string $message The error message.
-     * @param int $code The error code.
+     * @param string        $message  The error message.
+     * @param int           $code     The error code.
      * @param RootException $previous The inner exception, if any.
      *
      * @since [*next-version*]

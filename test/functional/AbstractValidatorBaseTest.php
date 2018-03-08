@@ -3,10 +3,8 @@
 namespace Dhii\Validation\FuncTest;
 
 use Xpmock\TestCase;
-use Dhii\Validation\Exception\ValidationFailedExceptionInterface;
 use Dhii\Validation\AbstractValidatorBase as TestSubject;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use PHPUnit_Framework_MockObject_MockBuilder as MockBuilder;
 use Exception as RootException;
 
 /**
