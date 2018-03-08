@@ -12,12 +12,13 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^5.3 | ^7.0",
-        "dhii/validation-interface": "dev-release/0.2",
-        "dhii/validation-abstract": "dev-develop",
-        "dhii/i18n-helper-base": "dev-develop",
-        "dhii/exception-helper-base": "dev-develop",
-        "dhii/iterator-helper-base": "dev-develop"
+        "php": "^5.4 | ^7.0",
+        "dhii/validation-interface": "0.2-alpha2",
+        "dhii/validation-abstract": "0.2-alpha1",
+        "dhii/i18n-helper-base": "0.1-alpha1",
+        "dhii/exception": "0.1-alpha1",
+        "dhii/exception-helper-base": "0.1-alpha1",
+        "dhii/iterator-helper-base": "0.1-alpha1"
     },
     "require-dev": {
         "dhii/php-cs-fixer-config": "dev-php-5.3",
@@ -30,8 +31,22 @@
             "Dhii\\Validation\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Dhii\\Validation\\UnitTest\\": "test/unit",
+            "Dhii\\Validation\\FuncTest\\": "test/functional"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "0.2.x-dev"
+        }
+    },
     "scripts": {
         "test": "phpunit",
-        "csfix": "php-cs-fixer fix -vvv"
+        "csfix": "php-cs-fixer fix -vvv",
+        "analyze": [
+            "phan --progress-bar --output-mode=text --output=test/phan-report.txt"
+        ]
     }
 }

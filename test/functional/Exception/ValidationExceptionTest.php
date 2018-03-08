@@ -2,6 +2,7 @@
 
 namespace Dhii\Validation\FuncTest;
 
+use Dhii\Validation\ValidatorInterface;
 use Xpmock\TestCase;
 use Exception as RootException;
 use Dhii\Validation\Exception\ValidationException as TestSubject;
@@ -75,6 +76,7 @@ class ValidationExceptionTest extends TestCase
         $subject = $this->createInstance();
 
         $this->assertInstanceOf(static::TEST_SUBJECT_CLASSNAME, $subject, 'Could not create a valid instance');
+        $this->assertInstanceOf('Exception', $subject, 'Test subject is not a valid exception');
     }
 
     /**

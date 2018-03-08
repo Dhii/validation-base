@@ -3,8 +3,9 @@
 namespace Dhii\Validation\FuncTest;
 
 use Xpmock\TestCase;
-use Dhii\Validation\Exception\ValidationFailedExceptionInterface;
 use Dhii\Validation\AbstractValidatorBase as TestSubject;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Exception as RootException;
 
 /**
  * Tests {@see TestSubject}.
@@ -23,28 +24,55 @@ class AbstractValidatorBaseTest extends TestCase
     /**
      * Creates a new instance of the test subject.
      *
-     * It will validate any boolean true value; all other values are invalid.
-     *
      * @since 0.1
      *
-     * @return TestSubject
+     * @param array $methods The methods to mock.
+     *
+     * @return TestSubject|MockObject The new instance.
      */
-    public function createInstance($errorsFactory = null)
+    public function createInstance($methods = [])
     {
-        if ($errorsFactory === null) {
-            $errorsFactory = function ($subject) {
-                if ($subject !== true) {
-                    return array('Subject must be a boolean `true` value');
-                }
+        is_array($methods) && $methods = $this->mergeValues($methods, [
+        ]);
 
-                return array();
-            };
-        }
+        $mock = $this->getMockBuilder(static::TEST_SUBJECT_CLASSNAME)
+            ->setMethods($methods)
+            ->getMockForAbstractClass();
 
-        $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
-                ->_getValidationErrors($errorsFactory)
-                ->__()
-                ->new();
+        return $mock;
+    }
+
+    /**
+     * Merges the values of two arrays.
+     *
+     * The resulting product will be a numeric array where the values of both inputs are present, without duplicates.
+     *
+     * @since [*next-version*]
+     *
+     * @param array $destination The base array.
+     * @param array $source      The array with more keys.
+     *
+     * @return array The array which contains unique values
+     */
+    public function mergeValues($destination, $source)
+    {
+        return array_keys(array_merge(array_flip($destination), array_flip($source)));
+    }
+
+    /**
+     * Creates a new exception.
+     *
+     * @since [*next-version*]
+     *
+     * @param string $message The exception message.
+     *
+     * @return RootException|MockObject The new exception.
+     */
+    public function createException($message = '')
+    {
+        $mock = $this->getMockBuilder('Exception')
+            ->setConstructorArgs([$message])
+            ->getMock();
 
         return $mock;
     }
@@ -62,81 +90,63 @@ class AbstractValidatorBaseTest extends TestCase
     }
 
     /**
-     * Tests whether valid values pass validation.
+     * Tests whether validation works as expected when given a valid value.
      *
-     * @since 0.1
+     * @since [*next-version*]
      */
-    public function testValidateSuccess()
+    public function testValidateSuccessValid()
     {
-        $subject = $this->createInstance();
+        $val = uniqid('subject');
+        $subject = $this->createInstance(['_getValidationErrors']);
+        $_subject = $this->reflect($subject);
 
-        $subject->validate(true);
-        $this->assertTrue(true, 'This line cannot be reached if validation fails.');
+        $subject->expects($this->exactly(1))
+            ->method('_getValidationErrors')
+            ->with($val)
+            ->will($this->returnValue([]));
+
+        $_subject->_construct();
+        $subject->validate($val);
     }
 
     /**
-     * Tests whether invalid values do not pass validation.
+     * Tests whether validation works as expected when given an invalid value.
      *
-     * @since 0.1
+     * @since [*next-version*]
      */
-    public function testValidateFailed()
+    public function testValidateSuccessInvalid()
     {
-        $subject = $this->createInstance();
+        $val = uniqid('subject');
+        $subject = $this->createInstance(['_getValidationErrors']);
+        $_subject = $this->reflect($subject);
 
-        try {
-            $subject->validate(false);
-        } catch (ValidationFailedExceptionInterface $e) {
-            $this->assertNotEmpty($e->getValidationErrors(), 'Validation exception must provide some error messages');
+        $subject->expects($this->exactly(1))
+            ->method('_getValidationErrors')
+            ->with($val)
+            ->will($this->returnValue([uniqid('problem')]));
 
-            return;
-        }
-
-        $this->assertTrue(false, 'Invalid subject passed validation');
+        $this->setExpectedException('Dhii\Validation\Exception\ValidationFailedException');
+        $subject->validate($val);
     }
 
     /**
-     * Tests that the validation exception gets created correctly.
+     * Tests whether validation fails as expected when a problem happens during validation.
      *
-     * @since 0.1
+     * @since [*next-version*]
      */
-    public function testCreateValidationException()
+    public function testValidateFailure()
     {
-        $message = 'apple';
-        $inner = new \Exception();
-        $code = 123;
-        $subject = $this->createInstance();
-        $reflection = $this->reflect($subject);
+        $val = uniqid('subject');
+        $exception = $this->createException('Problem validating');
+        $subject = $this->createInstance(['_getValidationErrors']);
+        $_subject = $this->reflect($subject);
 
-        $exception = $reflection->_createValidationException($message, $code, $inner);
-        /* @var $exception \Dhii\Validation\Exception\ValidationException */
-        $this->assertInstanceOf('Dhii\Validation\Exception\ValidationExceptionInterface', $exception, 'Created exception is not a valid validation exception');
-        $this->assertEquals($message, $exception->getMessage(), 'Created exception does not have the correct message');
-        $this->assertEquals($code, $exception->getCode(), 'Created exception does not have the correct code');
-        $this->assertEquals($inner, $exception->getPrevious(), 'Created exception does not have the correct inner exception');
-    }
+        $subject->expects($this->exactly(1))
+            ->method('_getValidationErrors')
+            ->with($val)
+            ->will($this->throwException($exception));
 
-    /**
-     * Tests that the validation exception gets created correctly.
-     *
-     * @since 0.1
-     */
-    public function testCreateValidationFailedException()
-    {
-        $message = 'apple';
-        $inner = new \Exception();
-        $code = 123;
-        $value = 'banana';
-        $errors = array('strawberry', 'pineapple');
-        $subject = $this->createInstance();
-        $reflection = $this->reflect($subject);
-
-        $exception = $reflection->_createValidationFailedException($message, $code, $inner, $value, $errors);
-        /* @var $exception \Dhii\Validation\Exception\ValidationFailedException */
-        $this->assertInstanceOf('Dhii\Validation\Exception\ValidationFailedExceptionInterface', $exception, 'Created exception is not a valid validation failed exception');
-        $this->assertEquals($message, $exception->getMessage(), 'Created exception does not have the correct message');
-        $this->assertEquals($code, $exception->getCode(), 'Created exception does not have the correct code');
-        $this->assertEquals($inner, $exception->getPrevious(), 'Created exception does not have the correct inner exception');
-        $this->assertEquals($value, $exception->getSubject(), 'Created exception does not have the correct subject');
-        $this->assertEquals($errors, $exception->getValidationErrors(), 'Created exception does not have the correct validation errors');
+        $this->setExpectedException('Dhii\Validation\Exception\ValidationException');
+        $subject->validate($val);
     }
 }

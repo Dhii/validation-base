@@ -2,16 +2,13 @@
 
 namespace Dhii\Validation;
 
-use Traversable;
-use Iterator;
-use ArrayIterator;
-use IteratorIterator;
 use AppendIterator;
+use ArrayIterator;
 use Dhii\Iterator\NormalizeIteratorCapableTrait;
-use Dhii\Iterator\CountIterableCapableTrait;
-use Dhii\Validation\Exception\ValidationException;
-use Dhii\Validation\Exception\ValidationFailedException;
-use Exception as RootException;
+use Dhii\Util\Normalization\NormalizeIterableCapableTrait;
+use Iterator;
+use IteratorIterator;
+use Traversable;
 
 /**
  * Base functionality for validators.
@@ -20,7 +17,7 @@ use Exception as RootException;
  *
  * @since [*next-version*]
  */
-abstract class AbstractCompositeValidatorBase extends AbstractCompositeValidator implements ValidatorInterface
+abstract class AbstractCompositeValidatorBase extends AbstractValidatorBase
 {
     /*
      * Adds iterator normalization functionality.
@@ -29,42 +26,23 @@ abstract class AbstractCompositeValidatorBase extends AbstractCompositeValidator
      */
     use NormalizeIteratorCapableTrait;
 
-    /*
-     * Adds functionality for counting iterables.
+    /* Functionality for composite validation.
      *
      * @since [*next-version*]
      */
-    use CountIterableCapableTrait;
+    use GetValidationErrorsCapableCompositeTrait;
 
-    /**
-     * {@inheritdoc}
+    /* Awareness of child validators.
      *
      * @since [*next-version*]
      */
-    public function validate($subject)
-    {
-        $this->_validate($subject);
-    }
+    use ChildValidatorsAwareTrait;
 
-    /**
-     * {@inheritdoc}
+    /* Normalization for iterables.
      *
      * @since [*next-version*]
      */
-    protected function _createValidationException($message = null, $code = null, RootException $previous = null)
-    {
-        return new ValidationException($message, $code, $previous, $this);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @since [*next-version*]
-     */
-    protected function _createValidationFailedException($message = null, $code = null, RootException $previous = null, $subject = null, $validationErrors = null)
-    {
-        return new ValidationFailedException($message, $code, $previous, $this, $subject, $validationErrors);
-    }
+    use NormalizeIterableCapableTrait;
 
     /**
      * {@inheritdoc}
