@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [[*next-version*]] - YYYY-MM-DD
+
+## [0.2-alpha1] - 2018-03-08
 ### Added
 - `AbstractBaseValidationException`, which serves as a base for simple validation exceptions.
 - `ValidatorTrait`, which groups traits commonly used for validation.
