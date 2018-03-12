@@ -152,7 +152,7 @@ class CreateValidationFailedExceptionCapableTraitTest extends TestCase
      *
      * @since [*next-version*]
      */
-    public function testCreateValidationFailedExceptionCapableTrait()
+    public function testCreateValidationFailedException()
     {
         $message = uniqid('message');
         $code = rand(0, 99);
