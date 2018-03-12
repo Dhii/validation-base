@@ -21,7 +21,7 @@ trait CreateValidationFailedExceptionCapableTrait
      *
      * @since [*next-version*]
      *
-     * @param string|Stringable|null                 $message          The message, if any
+     * @param string|Stringable|null                 $message          The message, if any. Defaults to the first validation error, if available.
      * @param int|null                               $code             The error code, if any.
      * @param RootException|null                     $previous         The inner exception, if any.
      * @param ValidatorInterface|null                $validator        The validator which triggered the exception, if any.
