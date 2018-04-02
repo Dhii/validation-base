@@ -152,7 +152,7 @@ class CreateValidationFailedExceptionCapableTraitTest extends TestCase
      *
      * @since [*next-version*]
      */
-    public function testCreateValidationFailedExceptionCapableTrait()
+    public function testCreateValidationFailedException()
     {
         $message = uniqid('message');
         $code = rand(0, 99);
@@ -171,5 +171,74 @@ class CreateValidationFailedExceptionCapableTraitTest extends TestCase
         $this->assertEquals($validator, $result->getValidator(), 'Created exception has the wrong validator');
         $this->assertEquals($val, $result->getSubject(), 'Created exception has the wrong subject');
         $this->assertEquals($errors, $result->getValidationErrors(), 'Created exception has the wrong validation errors');
+    }
+
+    /**
+     * Tests that `_createValidationFailedException()` works as expected when message is `null`.
+     *
+     * @since [*next-version*]
+     */
+    public function testCreateValidationFailedExceptionMessageDefault()
+    {
+        $message = null;
+        $code = rand(0, 99);
+        $inner = $this->createException(uniqid('message'));
+        $validator = $this->createValidator();
+        $val = uniqid('subject');
+        $failureReason = uniqid('error');
+        $errors = [$failureReason, uniqid('error'), uniqid('error')];
+        $subject = $this->createInstance();
+        $_subject = $this->reflect($subject);
+
+        $subject->expects($this->exactly(1))
+            ->method('_normalizeIterable')
+            ->with($errors)
+            ->will($this->returnArgument(0));
+        $subject->expects($this->exactly(1))
+            ->method('_normalizeString')
+            ->with($failureReason)
+            ->will($this->returnArgument(0));
+
+        $result = $_subject->_createValidationFailedException($message, $code, $inner, $validator, $val, $errors);
+        $this->assertInstanceOf('Dhii\Validation\Exception\ValidationFailedException', $result, 'Created exception is of the wrong type');
+        $this->assertEquals($failureReason, $result->getMessage(), 'Created exception has the wrong message');
+        $this->assertEquals($code, $result->getCode(), 'Created exception has the wrong code');
+        $this->assertEquals($inner, $result->getPrevious(), 'Created exception has the wrong inner exception');
+        $this->assertEquals($validator, $result->getValidator(), 'Created exception has the wrong validator');
+        $this->assertEquals($val, $result->getSubject(), 'Created exception has the wrong subject');
+        $this->assertEquals($errors, $result->getValidationErrors(), 'Created exception has the wrong validation errors');
+    }
+
+    /**
+     * Tests that `_createValidationFailedException()` works as expected when the default message cannot be determined.
+     *
+     * @since [*next-version*]
+     */
+    public function testCreateValidationFailedExceptionMessageDefaultCannotDetermine()
+    {
+        $message = null;
+        $code = rand(0, 99);
+        $inner = $this->createException(uniqid('message'));
+        $validator = $this->createValidator();
+        $val = uniqid('subject');
+        $failureReason = uniqid('error');
+        $errors = null;
+        $exception = $this->createException('Not iterable');
+        $subject = $this->createInstance();
+        $_subject = $this->reflect($subject);
+
+        $subject->expects($this->exactly(1))
+            ->method('_normalizeIterable')
+            ->with($errors)
+            ->will($this->throwException($exception));
+
+        $result = $_subject->_createValidationFailedException($message, $code, $inner, $validator, $val, $errors);
+        $this->assertInstanceOf('Dhii\Validation\Exception\ValidationFailedException', $result, 'Created exception is of the wrong type');
+        $this->assertEmpty($result->getMessage(), 'Created exception has the wrong message');
+        $this->assertEquals($code, $result->getCode(), 'Created exception has the wrong code');
+        $this->assertEquals($inner, $result->getPrevious(), 'Created exception has the wrong inner exception');
+        $this->assertEquals($validator, $result->getValidator(), 'Created exception has the wrong validator');
+        $this->assertEquals($val, $result->getSubject(), 'Created exception has the wrong subject');
+        $this->assertEmpty($errors, $result->getValidationErrors(), 'Created exception has the wrong validation errors');
     }
 }

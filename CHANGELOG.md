@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [[*next-version*]] - YYYY-MM-DD
+### Added
+- `_createValidationFailedException()` will now default the exception message to the first validation error, if available. 
 
 ## [0.2-alpha1] - 2018-03-08
 ### Added
