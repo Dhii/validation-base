@@ -19,7 +19,7 @@
         "dhii/exception": "0.1-alpha1",
         "dhii/exception-helper-base": "0.1-alpha1",
         "dhii/iterator-helper-base": "0.1-alpha1",
-        "dhii/normalization-helper-base": "0.1-alpha2|0.1-alpha2"
+        "dhii/normalization-helper-base": "^0.1"
     },
     "require-dev": {
         "dhii/php-cs-fixer-config": "dev-php-5.3",
