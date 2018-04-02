@@ -44,7 +44,6 @@
       <path value="$PROJECT_DIR$/vendor/dhii/php-cs-fixer-config" />
       <path value="$PROJECT_DIR$/vendor/dhii/exception-interface" />
       <path value="$PROJECT_DIR$/vendor/dhii/i18n-helper-base" />
-      <path value="$PROJECT_DIR$/vendor/dhii/exception-helper-base" />
       <path value="$PROJECT_DIR$/vendor/dhii/stringable-interface" />
       <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer" />
       <path value="$PROJECT_DIR$/vendor/dhii/normalization-helper-base" />
